@@ -1,0 +1,128 @@
+npm install -g expo-cli
+expo init CBTUApp
+cd CBTUApp
+npm install @react-navigation/native @react-navigation/stack
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+// App.js
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+const HomeScreen = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>CBTU Natal</Text>
+      </View>
+      <Image
+        source={{ uri: 'https://link-para-o-logotipo.com/logo.png' }} // Substitua pelo link do logotipo
+        style={styles.logo}
+      />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Horários')}
+      >
+        <Text style={styles.buttonText}>Horários</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Grade Horária')}
+      >
+        <Text style={styles.buttonText}>Grade Horária</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Mapa do Sistema')}
+      >
+        <Text style={styles.buttonText}>Mapa do Sistema</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Fale Conosco')}
+      >
+        <Text style={styles.buttonText}>Fale Conosco</Text>
+      </TouchableOpacity>
+      <View style={styles.footer}>
+        <View style={styles.footerItem}>
+          <Text style={styles.footerText}>R$ 2,50</Text>
+        </View>
+        <View style={styles.footerItem}>
+          <Text style={styles.footerText}>Gratuidade</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Horários" component={() => <Text>Horários</Text>} />
+        <Stack.Screen name="Grade Horária" component={() => <Text>Grade Horária</Text>} />
+        <Stack.Screen name="Mapa do Sistema" component={() => <Text>Mapa do Sistema</Text>} />
+        <Stack.Screen name="Fale Conosco" component={() => <Text>Fale Conosco</Text>} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  header: {
+    height: '5%',
+    width: '100%',
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  logo: {
+    height: '20%',
+    width: '80%',
+    resizeMode: 'contain',
+    marginVertical: 20,
+  },
+  button: {
+    width: '80%',
+    height: '10%',
+    backgroundColor: '#DDD',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  footer: {
+    height: '10%',
+    width: '100%',
+    flexDirection: 'row',
+  },
+  footerItem: {
+    width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#000',
+  },
+  footerText: {
+    fontSize: 18,
+  },
+});
+
+export default App;
+expo start
